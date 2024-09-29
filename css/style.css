@@ -359,6 +359,10 @@ body {
 
 .about .row .about-img {
   flex: 1 1 45rem;
+}
+
+.about .row,
+.about-img img {
   width: 96%;
 }
 
@@ -600,7 +604,7 @@ body {
   cursor: pointer;
 }
 
-.contact .row form .btn.disabled {
+.contact .row form .btn.disabled{
   background-color: #999;
   cursor: not-allowed;
 }
@@ -862,55 +866,3 @@ footer .credits a {
     font-size: 55%;
   }
 }
-
-
-@media only screen and (max-width: 450px) {
-  html {
-    font-size: 50%; /* Menyesuaikan ukuran font untuk layar kecil */
-  }
-
-  .navbar {
-    padding: 1rem 5%;
-  }
-
-  .navbar .navbar-logo {
-    font-size: 1.5rem;
-  }
-
-  .navbar .navbar-nav a {
-    font-size: 1.2rem;
-  }
-
-  .hero .content h1 {
-    font-size: 3rem;
-  }
-
-  .hero .content p {
-    font-size: 1.4rem;
-  }
-
-  .menu p {
-    font-size: 1rem;
-  }
-
-  .contact .row {
-    flex-direction: column;
-  }
-
-  .contact .row .map {
-    height: 20rem;
-  }
-
-  .contact .row form {
-    padding: 2rem 1rem;
-  }
-
-  .contact .row form .input-group input {
-    font-size: 1.4rem;
-  }
-
-  .modal-content {
-    flex-direction: column;
-  }
-}
-

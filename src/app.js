@@ -136,62 +136,14 @@ form.addEventListener('keyup', function () {
 
 
 // kirim data
-checkoutbutton.addEventListener('click', async function (e) {
+checkoutbutton.addEventListener('click', function (e) {
     e.preventDefault();
     const formData = new FormData(form)
     const data = new URLSearchParams(formData);
     const objdata = Object.fromEntries(data);
+    const message = formatmessage(objdata)
+    window.open('http://wa.me/6288231759642?text=' + encodeURIComponent(message));
 
-    // const message = formatmessage(objdata)
-    // window.open('http://wa.me/6288231759642?text=' + encodeURIComponent(message));
-
-    // minta transaction token menggunakan ajax/fetch
-    try {
-        const response = await fetch('php/payment.php', {
-            method: 'POST',
-            body: data,
-        });
-        const token = await response.text();
-        window.snap.pay(token, {
-            onSuccess: function (result) {
-                Swal.fire({
-                    title: 'Pembayaran Berhasil!',
-                    text: 'Terima kasih atas pembayaran Anda.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-                console.log(result);
-            },
-            onPending: function (result) {
-                Swal.fire({
-                    title: 'Pembayaran Pending!',
-                    text: 'Pembayaran Anda sedang diproses. Silakan tunggu konfirmasi.',
-                    icon: 'info',
-                    confirmButtonText: 'OK'
-                });
-                console.log(result);
-            },
-            onError: function (result) {
-                Swal.fire({
-                    title: 'Pembayaran Gagal!',
-                    text: 'Maaf, terjadi kesalahan saat memproses pembayaran Anda.',
-                    icon: 'error',
-                    confirmButtonText: 'Coba Lagi'
-                });
-                console.log(result);
-            },
-            onClose: function () {
-                Swal.fire({
-                    title: 'Pembayaran Dibatalkan!',
-                    text: 'Anda menutup popup sebelum menyelesaikan pembayaran.',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                });
-            }
-        });
-    } catch (err) {
-        console.log(err.message);
-    }
 });
 
 
@@ -202,13 +154,11 @@ const formatmessage = (obj) => {
     Email: ${obj.email}
     No HP: ${obj.phone}
     Alamat: ${obj.address}
-    
 Data Pesanan
     ${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)}) \n`)}
-    TOTAL : ${rupiah(obj.total)} 
-    Terima Kasih.`;
+TOTAL : ${rupiah(obj.total)} 
+Terima Kasih.`;
 };
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const contactbtn = document.querySelector('#contactButton');
@@ -253,3 +203,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return `Data Customer\nNama: ${obj.name}\nEmail: ${obj.email}\nNo HP: ${obj.phone}\nAlamat: ${obj.address}\nPesan:...\n\nTerima kasih telah menghubungi kami! Kami akan segera merespons pesan Anda.`;
     };
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// konversi rupiah
+
+const rupiah = (number) => {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+    }).format(number);
+};

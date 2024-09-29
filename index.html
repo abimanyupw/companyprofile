@@ -23,13 +23,27 @@
 
     <!-- my css -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- // konversi rupiah -->
+    <script>
+        const rupiah = (number) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+            }).format(number);
+        };</script>
 
     <!-- alpine js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- app -->
     <script src="src/app.js" async></script>
 
+
+    <!-- midtrans -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-wlAefoHGXi1PJ_PO"></script>
 
 
 
@@ -297,8 +311,6 @@
 
 
 
-
-    <!-- contact section start -->
 
     <!-- contact section start -->
 
